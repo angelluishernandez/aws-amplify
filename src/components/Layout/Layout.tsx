@@ -8,7 +8,9 @@ export default function Layout({ children }: ChildrenProps) {
   return (
     <React.Fragment>
       <Navbar />
-      <Container sx={{ margin: "20px 0" }}>{children}</Container>
+      <Container maxWidth="lg" sx={{ paddingTop: "20px" }}>
+        {children}
+      </Container>
       <Footer />
     </React.Fragment>
   );

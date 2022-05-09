@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import About from "../pages/About/CreateTodo";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
 
 export default function RouterConfig() {
   return (
@@ -8,6 +9,7 @@ export default function RouterConfig() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create-todo" element={<About />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );

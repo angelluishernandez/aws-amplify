@@ -11,6 +11,10 @@ const links = [
     url: "/create-todo",
     label: "Create todo",
   },
+  {
+    url: "/login",
+    label: "Login",
+  },
 ];
 
 export default function Navbar() {
