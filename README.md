@@ -1,1 +1,1 @@
-*
+Aws amplify test
