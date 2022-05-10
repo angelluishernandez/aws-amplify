@@ -1,5 +1,6 @@
 import React from "react";
 import { ChildrenProps } from "../types/types";
+import ErrorProvider from "./ErrorContext";
 import IncrementProvider from "./IncrementContext";
 import TodoProvider from "./TodoContext";
 
@@ -10,9 +11,11 @@ export const AppContext = React.createContext<any>(null);
 
 const AppProvider = ({ children }: ChildrenProps) => {
   return (
-    <IncrementProvider>
-      <TodoProvider>{children}</TodoProvider>
-    </IncrementProvider>
+    <ErrorProvider>
+      <IncrementProvider>
+        <TodoProvider>{children}</TodoProvider>
+      </IncrementProvider>
+    </ErrorProvider>
   );
 };
 

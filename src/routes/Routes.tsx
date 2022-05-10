@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import About from "../pages/About/CreateTodo";
+import About from "../pages/CreateTodo/CreateTodo";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 

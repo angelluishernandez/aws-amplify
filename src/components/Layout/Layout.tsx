@@ -1,10 +1,14 @@
 import { Container } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { ErrorContext } from "../../context/ErrorContext";
 import { ChildrenProps } from "../../types/types";
+import ErrorToast from "../ErrorToast/ErrorToast";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 
 export default function Layout({ children }: ChildrenProps) {
+  const { error, deleteError } = useContext(ErrorContext);
+
   return (
     <React.Fragment>
       <Navbar />
@@ -12,6 +16,13 @@ export default function Layout({ children }: ChildrenProps) {
         {children}
       </Container>
       <Footer />
+      {error && (
+        <ErrorToast
+          errorText={error.errorText}
+          handleCloseClick={deleteError}
+          open={!!error}
+        />
+      )}
     </React.Fragment>
   );
 }
