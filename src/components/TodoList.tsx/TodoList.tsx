@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Todo } from "../../types/types";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { Link } from "react-router-dom";
 type TodoListProps = {
   todos: Todo[];
   handleDelete: (id: string | number) => Promise<void>;
@@ -12,12 +13,12 @@ export default function TodoList({ todos, handleDelete }: TodoListProps) {
   return (
     <React.Fragment>
       <Stack>
-        {todos.map((todo: Todo, index: number) => {
+        {todos.map((todo: Todo) => {
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={todo.id}>
               <Divider />
               <Typography variant="h5">
-                Todo : {todo.name}{" "}
+                <Link to={`/todo/${todo.id}`}>Todo : {todo.name} </Link>
                 <IconButton
                   color="error"
                   component="span"

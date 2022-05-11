@@ -10,6 +10,7 @@ export type Todo = {
   id: number | string;
   name: string;
   description: string;
+  image?: string
 };
 
 export type TodoContextType = {

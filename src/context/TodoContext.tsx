@@ -1,7 +1,7 @@
 import { API } from "aws-amplify";
 import React, { useState } from "react";
 import { createTodo, deleteTodo } from "../graphql/mutations";
-import { listTodos } from "../graphql/queries";
+import { getTodo, listTodos } from "../graphql/queries";
 import { ChildrenProps, Todo } from "../types/types";
 
 export const TodoContext = React.createContext<any>(null);
@@ -40,20 +40,33 @@ const TodoProvider = ({ children }: ChildrenProps) => {
     }
   };
 
-  const getTodo = async (id: string) => {};
+  const onGetTodo = async (id: string) => {
+    try {
+      const todo: any | undefined = await API.graphql({
+        query: getTodo,
+        variables: { id },
+      });
+      return todo?.data.getTodo;
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
 
-  const onUpdateTodo = (id: number, newText: string): void => {
-    todos.filter((todo: Todo) => {
-      if (todo.id === id) {
-        todo.name = newText;
-      }
-      setTodos([...todos]);
-    });
+  const onUpdateTodo = async (id: number, data: String): Promise<void> => {
+    try {
+    } catch (error) {}
   };
 
   return (
     <TodoContext.Provider
-      value={{ todos, getTodos, onDeleteTodo, onNewTodo, onUpdateTodo }}
+      value={{
+        todos,
+        getTodos,
+        onDeleteTodo,
+        onGetTodo,
+        onNewTodo,
+        onUpdateTodo,
+      }}
     >
       {children}
     </TodoContext.Provider>
