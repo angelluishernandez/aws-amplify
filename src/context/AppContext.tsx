@@ -1,5 +1,7 @@
+import { Authenticator } from "@aws-amplify/ui-react";
 import React from "react";
 import { ChildrenProps } from "../types/types";
+import AuthProvider from "./AuthProvider";
 import ErrorProvider from "./ErrorContext";
 import IncrementProvider from "./IncrementContext";
 import TodoProvider from "./TodoContext";
@@ -11,11 +13,15 @@ export const AppContext = React.createContext<any>(null);
 
 const AppProvider = ({ children }: ChildrenProps) => {
   return (
-    <ErrorProvider>
-      <IncrementProvider>
-        <TodoProvider>{children}</TodoProvider>
-      </IncrementProvider>
-    </ErrorProvider>
+    <Authenticator.Provider>
+      <AuthProvider>
+        <ErrorProvider>
+          <IncrementProvider>
+            <TodoProvider>{children}</TodoProvider>
+          </IncrementProvider>
+        </ErrorProvider>
+      </AuthProvider>
+    </Authenticator.Provider>
   );
 };
 

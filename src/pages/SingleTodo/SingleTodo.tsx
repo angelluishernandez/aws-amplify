@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 import { ErrorContext } from "../../context/ErrorContext";
 import { TodoContext } from "../../context/TodoContext";
 import { Todo } from "../../types/types";
-import { API, Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 
 export default function SingleTodo() {
   const { onNewError } = useContext(ErrorContext);
@@ -34,10 +34,21 @@ export default function SingleTodo() {
     }
   };
 
-  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageAdd = async (e: any) => {
     try {
-      if (!e.target.value) return;
-    } catch (error) {}
+      console.log(e.target);
+      if (!e?.target?.files[0]) return;
+      const image = e.target.files[0];
+      const res = await Storage.put(image.name, image, {
+        contentType: "image/png",
+      });
+
+      const imagesList = await Storage.list("photos/");
+      console.log(imagesList);
+      console.log(res);
+    } catch (error: any) {
+      onNewError(error?.errors[0].message);
+    }
   };
 
   return (
@@ -66,7 +77,17 @@ export default function SingleTodo() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Update</Button>
+            <label>
+              <input
+                type="file"
+                onChange={handleImageAdd}
+                style={{ display: "none" }}
+                id="button-upload"
+              />
+              <Button variant="outlined" component="span">
+                Upload
+              </Button>
+            </label>
           </CardActions>
         </Card>
       )}

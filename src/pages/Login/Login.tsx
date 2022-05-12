@@ -1,16 +1,20 @@
 import { Authenticator } from "@aws-amplify/ui-react";
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 export default function Login() {
-  return <Authenticator></Authenticator>;
-}
+  const { isLoggedIn } = useContext(AuthContext);
 
-{
-  /* <Authenticator>
-          {({signOut, user} ) => {
-              return (
-
-              )
-          }}
-        <div>this is the login</div>
-      </Authenticator> */
+  return (
+    <>
+      {isLoggedIn ? (
+        <Navigate to="/" />
+      ) : (
+        <React.Fragment>
+          <Authenticator />
+        </React.Fragment>
+      )}
+    </>
+  );
 }

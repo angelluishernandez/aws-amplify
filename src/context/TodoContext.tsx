@@ -1,4 +1,4 @@
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import React, { useState } from "react";
 import { createTodo, deleteTodo } from "../graphql/mutations";
 import { getTodo, listTodos } from "../graphql/queries";
@@ -52,8 +52,9 @@ const TodoProvider = ({ children }: ChildrenProps) => {
     }
   };
 
-  const onUpdateTodo = async (id: number, data: String): Promise<void> => {
+  const onUpdateTodo = async (id: number, data: File): Promise<void> => {
     try {
+      await Storage.put(data.name, data);
     } catch (error) {}
   };
 
